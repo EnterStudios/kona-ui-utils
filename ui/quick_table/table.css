@@ -1,0 +1,78 @@
+
+/*tabs*/
+
+.tab{
+	display:inline-block;
+	cursor:pointer;
+	padding:8px;
+	text-transform: capitalize;
+	color: #333;
+	background: linear-gradient(to bottom, #eee 0%, #aaa 100%);
+	text-align:left;font-weight:bold;
+	border:1px outset #ccc;
+	border-bottom:0px;
+	border-top:0px;
+}
+
+.tab.active, .tab:hover{
+	color:white;
+	background: linear-gradient(to bottom, #69c 0%, #258 100%);
+}
+
+
+
+/*tables*/
+
+.data_table_wrap{
+	display:inline-block;
+}
+
+.data_table_wrap .loading{
+	padding:8px;
+}
+
+.data_table{
+	border-collapse:collapse;
+	table-layout:fixed;
+}
+
+.data_table tbody, .data_table thead{display:block;}
+.data_table tbody{overflow:auto; overflow-x:hidden; max-height:70vh;}
+
+.data_table td{padding:6px;width:100px;min-width:100px;
+	border: 1px solid transparent;vertical-align:top;}
+
+.data_table thead td{
+	height:30px;
+	line-height:23px;
+	padding:0px 6px 0px 6px;
+	color: #333;
+	border-color: #999;
+	background: linear-gradient(to bottom, #eee 0%, #aaa 100%);
+	text-align:left;font-weight:bold;vertical-align:middle;
+}
+
+.data_table .crud{width:70px;min-width:70px;cursor:pointer;text-align:center;border-left-width:0px;}
+
+.data_table thead .scroll_td{width:15px !important;min-width:15px !important;padding:0px;border:0px;background:#d6d6d6;} /*makeup for scroll width*/
+.data_table thead tr:first-child td{cursor:pointer;text-transform: capitalize}
+.data_table thead tr:first-child img{vertical-align:middle;}
+
+.data_table tr:nth-child(even){background-color:#eeeeee;}
+.data_table tr:nth-child(odd){background-color:white;}
+.data_table tbody tr:first-child td, .data_table thead tr:first-child td{border-top-width:0px;}
+.data_table tbody tr.selected{color: white; font-weight:bold; background: linear-gradient(to bottom, #9af 0%, #67f 100%);}
+.data_table tbody tr.selected *{color: white; font-weight:bold; }
+
+.data_table li{list-style:none}
+
+.search_wrap{padding-right:8px;}
+input.search{color:black;  width:110px;  
+	background-image: url('https://s3.amazonaws.com/kona-images/ui/quick_table/search.png');
+    background-position: center right;
+    background-repeat: no-repeat;}
+
+
+/*table - pagination*/
+.pagination{display:block;text-align:right;margin-top:10px;font-weight:bold;}
+.pagination select{padding:1px;}

@@ -1,0 +1,148 @@
+
+/*general elements*/
+body.bi{
+	background-image:  url('data:image/png;base64, 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');
+	color: #cacaca;
+}
+
+body.bi *{font: 14px Helvetica}
+
+
+body.bi .minor_button, body.bi .major_button{
+	border-radius:4px;border:1px outset #fff  !important;
+	background:#151719 !important;color:#fff  !important;
+	padding:3px;transition:0.3s background linear;
+}
+
+ body.bi .major_button{
+	font-weight:bold;
+}
+
+body.bi .minor_button:hover, body.bi .major_button:hover,
+body.bi .minor_button.active, body.bi .major_button.active{
+	background:#fff  !important;color:#1c2022  !important}
+
+body.bi input, body.bi textarea, body.bi select{background-color:#151719;
+		border:1px solid #2e3138;color:#cacaca;
+		transition:0.3s all linear;box-shadow: none;}
+
+
+body.bi a, body.bi a:visited{color:#cacaca;}
+body.bi a:hover{color:#fff;}
+
+body.bi input:hover, body.bi textarea:hover{color:#fff;}
+
+
+body.bi ::-webkit-scrollbar {background: #151719;}
+	
+body.bi ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+body.bi ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #343841; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+
+/*specific elements*/
+
+body.bi .box{
+	background-image:none;
+	box-shadow: 1px 1px 5px #333 inset;
+	border: 1px solid #000;
+	box-shadow: none;
+	border-radius:0px;
+	background-color:#151719;
+}
+
+body.bi .box_title{font-weight:bold;color:#fff;border-bottom:1px solid #333}
+
+body.bi .top{	  
+  color: white;
+  background-image: none;
+  background: #22252B;
+  box-shadow: 0px 2px 2px black;
+}
+
+body.bi .used_sometimes{opacity:0.6;}
+body.bi .used_rarely{opacity:0.3;}
+
+
+
+
+
+/*data_table*/
+
+body.bi .data_table_wrap{
+
+		font: 14px Helvetica;
+		border: 1px solid #000;
+		background:#151719 !important;
+		color: #cacaca;
+	}
+
+body.bi .data_table tbody{
+	border-bottom:1px solid #000;
+}
+
+body.bi .data_table tbody, body.bi .data_table tr, 
+body.bi .data_table thead td, body.bi .data_table_title{
+	background: #151719;
+}
+
+body.bi .data_table td, .data_table thead td{
+	border: 1px solid black;
+	font:14px Helvetica;
+}
+
+body.bi .data_table thead td,  body.bi .data_table_title{
+	color: #fff;
+}
+
+body.bi .data_table td{
+	color: #cacaca;
+	a {color: #cacaca;}
+}
+
+body.bi .data_table tbody tr:nth-child(odd) td{
+	background: #1a1c1e;
+} 
+
+body.bi .data_table_title{
+		color: inherit;
+		text-transform:capitalize;
+		font-weight:700;
+	}
+
+body.bi .data_table thead td{
+		text-transform:capitalize;
+		font-weight:normal;
+	}
+
+body.bi .data_table thead td.active {
+  font-weight:bold;
+}
+
+body.bi .data_table tbody tr.selected *{
+	color:#496EFF;
+}
+
+
+/*OVERRIDES*/
+
+/*jquery-ui overrides*/
+body.bi .ui-widget-header {
+  background-image: none;box-shadow: none;
+  text-shadow: none;background: none;
+  color: #fff;font-weight:bold;border: 0px;
+  border-bottom: 1px solid #999;margin-bottom: 10px;border-radius: 0px;
+}
+body.bi .ui-dialog .ui-dialog-titlebar{padding: 0px 0px 16px 0px;}
+body.bi .ui-tooltip.ui-widget-content {background: #151719;}
+body.bi .ui-tooltip{box-shadow: none;border-width:1px;}

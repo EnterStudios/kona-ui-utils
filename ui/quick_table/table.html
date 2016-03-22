@@ -1,0 +1,95 @@
+
+
+<div ng-controller="quickTableCtrl" class="data_table_wrap" id="{{query.title}}_wrap"
+     ng-init="dir='https://s3.amazonaws.com/kona-images/ui/quick_table'">
+  
+  <div ng-if="tableReady">
+    <table class="data_table" ng-model="query.sort">
+        
+        <thead>
+          <tr ng-click="query.sort.page=0">
+
+            <td ng-repeat="cell in query.cells" 
+                ng-show="cell.show != false && cell.showMetric!=0" class="{{cell.id}}"
+                ng-click="sortCell(cell)" title="{{cell.info || ''}}" 
+                ng-class="{'active' : query.sort.order==cell.id}">
+
+                <input type="checkbox" ng-if="checkAll && $index==0" 
+                    class="checkAll" title="check / uncheck all"
+                    ng-click="checkUncheckAll();$event.stopPropagation();">
+
+                <img ng-if="minMax && $index==0" id="minMax" ng-src="{{dir}}/max.png"
+                  class="pointer" title="maximize / minimize table"
+                  ng-click="minMaxTable();$event.stopPropagation();"
+                  ng-mouseover="showInputParams();" ng-mouseleave="hideInputParams();">
+              
+                {{cell.title}}
+                
+                <span ng-show="$index==0">({{(query.dataArray | filter:query.sort.search).length}})</span>
+                
+                <div style="width:16px;display:inline-block">
+                  <img title="sort down" ng-src="{{dir}}/arrow_down.png" ng-show="query.sort.order=='{{cell.id}}' && query.sort.reverse==true">
+                  <img title="sort up" ng-src="{{dir}}/arrow_up.png" ng-show="query.sort.order=='{{cell.id}}' && query.sort.reverse==false"></i>
+                </div>
+
+                <span ng-if="$index==0" class="search_wrap" ng-show="query.dataArray.length > 0">
+                  &nbsp; <input ng-model="query.sort.search" class="field_small search" 
+                    ng-click="$event.stopPropagation()" ng-keyup="checkResize()">
+                </span>
+
+                <span ng-if="cell.titleTemplate" ng-click="$event.stopPropagation()"
+                  ng-include src="cell.titleTemplate"></span>
+
+            </td>
+
+            <td ng-if="query.crud" class="crud">
+              <a ng-click="add()" ng-show="query.crudAdd != false">Add</a>
+            </td>
+
+            <td class="scroll_td"></td>
+       
+          </tr>   
+        </thead>
+
+        <tbody>
+          <tr ng-show="query.loading==false" rowId="{{row.id}}" ng-repeat=
+            "row in query.dataArray | filter:query.sort.search | orderBy:query.sort.order:query.sort.reverse | startFrom:query.sort.page*query.sort.pageSize | limitTo:query.sort.pageSize" ng-class="{'selected' : edited && edited.id==row.id}">
+            
+            <td ng-repeat="cell in query.cells" 
+                ng-show="cell.show != false && cell.showMetric!=0" class="{{cell.id}}">
+                <span ng-if="cell.template" ng-include src="cell.template"></span>
+                <span ng-if="cell.numberClass" ng-class="numberClass(cell.id, row[cell.id])">{{row[cell.id]}}</span>
+                <span ng-if="!cell.template && !cell.numberClass">{{row[cell.id]}}</span>
+                <img ng-if="row.loading && $index==0" align="top" ng-src="{{dir}}/loading.gif">
+            </td>
+
+            <td ng-if="query.crud" class="crud">
+              <span ng-if="!query.crudURL">
+                <img title="view / edit" ng-src="{{dir}}/edit.png" ng-click="edit($parent.row)">&nbsp;
+                <img title="delete" ng-src="{{dir}}/delete.png" ng-click="delete($parent.row)">
+              </span>
+              <span ng-if="query.crudURL" ng-include src="query.crudURL"></span>
+            </td>
+            
+          </tr>
+        </tbody>
+    </table>
+
+    <div ng-if="query.loading" class="loading"><img align="top" ng-src="{{dir}}/loading.gif"> Loading ...</div>
+
+    <div class="message" ng-model="message">{{message}}</div>
+
+    <div class="pagination" ng-show="query.dataArray.length > query.sort.pageSize && query.loading==false">
+
+      <button ng-disabled="query.sort.page == 0" class="page_num major_button" ng-click="query.sort.page=query.sort.page-1">&lt; prev</button>
+      
+      <select ng-model="query.sort.page" ng-init="options[0].value">
+          <option ng-repeat="n in [] | range:numOfPages()" ng-click="query.sort.page=n" value="{{n}}">{{n+1}}  / {{numOfPages()}}</option>
+      </select>
+
+      <button ng-disabled="query.sort.page >= query.dataArray.length/query.sort.pageSize - 1" class="page_num major_button" ng-click="query.sort.page=query.sort.page+1">next &gt;</button>
+
+    </div>
+  </div>
+  
+</div>
