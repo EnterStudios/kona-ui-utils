@@ -1,0 +1,21 @@
+{
+  "name": "kona-images",
+  "homepage": "https://github.com/kontera-technologies/kona-images",
+  "authors": [
+    "orgar <orgarfunkel@gmail.com>"
+  ],
+  "description": "This is kontera style ui",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "kontera"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
