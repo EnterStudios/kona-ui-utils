@@ -1,6 +1,6 @@
 {
-  "name": "kona-images",
-  "homepage": "https://github.com/kontera-technologies/kona-images",
+  "name": "kona-ui-utils",
+  "homepage": "https://github.com/kontera-technologies/kona-ui-utils",
   "authors": [
     "orgar <orgarfunkel@gmail.com>"
   ],
@@ -17,5 +17,6 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "version": "0.0.1"
 }
