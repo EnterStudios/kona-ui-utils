@@ -136,14 +136,18 @@ response: any response
 
 			      	if(typeof params.scope.addEditCB === "function"){
 			      		params.scope.addEditCB(response);
-			      		$("#"+that.dialogID).dialog("close");
+			      		
 			      	}else{
-				      	$("#"+that.dialogID).dialog("close");
+				      	
 				      	setTimeout(function(){
 				      		params.scope.newObject=true;
 				      		params.scope.edited = {};
 				      	},700); //wait till dialog closes (so it wont change)
 				    }
+
+				    if($("#"+that.dialogID).hasClass('ui-dialog-content')) {
+					    $("#"+that.dialogID).dialog("close");
+					}
 			        
 			      }).error(function(e) {
 			        error(e);
