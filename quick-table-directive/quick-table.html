@@ -1,0 +1,134 @@
+
+
+<div class="quick-table-wrap">
+
+  <div class="quick-table" ng-model="query.sort">
+      
+      <!--HEAD-->
+      <div class="row thead">
+
+        <!--CRUD-->
+        <div ng-if="query.crud" class="column crud">
+          <span ng-if="query.crudTemplateHead" ng-include src="query.crudTemplateHead"></span>
+          <a ng-if="!query.crudTemplateHead" ng-click="add()"><i class="icon-uniE622"></i> Add</a>  
+        </div>
+
+        <div ng-repeat="column in query.columns" ng-if="!column.hidden"
+            class="column {{column.title.toLowerCase().replace(' ', '') || column.id}} flex{{column.flex}}"
+            ng-class="{'selected' : query.sort.order == column.id}"
+            ng-click="clickColumn(column.id);" title="{{column.tooltip ? column.tooltip : ''}}" am-tooltip="top center to bottom center">
+
+            <span ng-if="column.templateHead" ng-include src="column.templateHead"></span>
+
+            <!--search-->
+            <span class="search" ng-show="$index==0" ng-class="{selected: query.sort.search}" ng-click="$event.stopPropagation()">
+              <i class="icon-Search pointer" ng-click="toggleSearch();"></i>
+
+              <span ng-show="!query.loading && query.searchOpened">
+                <input ng-model="query.sort.search"
+                  ng-keyup="search();" ng-click="$event.stopPropagation();">
+
+                  <i class="icon-X_CLEAR pointer" ng-click="query.sort.search='';query.searchOpened=false;"></i>
+              </span>
+            </span>
+       
+            <span ng-show="$index>0 || !query.searchOpened" class="column-title">{{column.title}}</span>
+            
+            <!--(number)-->
+            <span ng-if="$index==0">
+              ({{(query.viewArray | filter:query.sort.search).length}})
+            </span>
+
+            
+            <!--sort-->
+            <span ng-if="column.sort != false">
+              <i title="sort down" ng-show="(query.sort.order=='{{column.id}}' && query.sort.reverse==true) || (column.lockable && query.sort.order==='order')" class="icon icon-Tringle_Down"></i>
+              <i title="sort up" ng-show="query.sort.order=='{{column.id}}' && query.sort.reverse==false" class="icon icon-Tringle_Up"></i>
+            </span>
+
+        </div>
+
+        <div class="column scroll-td">
+
+          <!--table-options-->
+          <div ng-if="!query.loading"
+            ng-click="$event.stopPropagation();"
+            ng-mouseover="$event.stopPropagation()">
+            
+            <i class="pointer right icon-threedots" ng-click="query.tableOptionsOpened=!query.tableOptionsOpened"></i>
+            
+            <div class="table-options" ng-if="!query.loading" ng-show="query.tableOptionsOpened"
+              ng-mouseleave="query.tableOptionsOpened=false;">
+              
+              <div class="table-options-columns-select" ng-if="!query.fixedSize">
+                <div class="table-options-col" ng-click="selectAllColumns();" ng-class="{selected: query.allColumns}">
+                  All Columns
+                  <i class="icon-Box_Roll_On"></i>
+                </div>
+
+                <div class="table-options-col" ng-repeat="col in query.columns" ng-class="{selected: !col.hidden}"
+                  ng-if="!col.alwaysShown" ng-click="selectColumns(col);">
+                  {{col.title}}
+                  <i class="icon-Box_Roll_On"></i>
+                </div>
+              </div>
+
+              <!--export-->
+              <a class="table-options-link" ng-if="query.export" id="export_{{query.id}}" 
+              ng-click="query.export()"><i class="icon-Export"></i> Export</a>
+              <a id="export_{{query.id}}_link" href=""></a>
+
+              <!--max/min-->
+              <a class="table-options-link" ng-if="query.maxMin"
+               ng-click="resize(query.id, $event);query.tableOptionsOpened=false;"><i class="max_min" 
+                ng-class="{'icon-minimize' : maxed==query.id, 'icon-maximize': maxed!=query.id}"></i>
+                {{maxed==query.id ? 'Minimize' : 'Maximize'}}
+                </a>
+
+              
+            </div>
+
+            
+
+          </div>
+
+        </div>
+
+      </div>
+      
+
+      <!--BODY-->
+
+      <div vs-repeat vs-excess="{{query.fixedSize ? 200 : 2}}" class="tbody">
+        
+        <div class="row" ng-repeat="row in query.viewArray"
+          ng-class="{selected : selected.group && selected.group.id==row.id}">
+          
+          <div ng-if="query.crud" class="column crud">
+            <span ng-if="query.crudTemplateBody" ng-include src="query.crudTemplateBody"></span>
+            <span ng-if="!query.crudTemplateBody">
+              <i title="edit" class="pointer icon icon-edit_icon" ng-click="edit($parent.row)"></i>
+              &nbsp;
+              <i title="delete" class="pointer icon icon-Trash" ng-click="delete($parent.row)"></i>
+            </span>
+          </div>
+
+          <div ng-repeat="column in query.columns" ng-if="!column.hidden"
+              class="column {{column.title.toLowerCase().replace(' ', '') || column.id}} flex{{column.flex}}">
+              <span ng-if="column.template" ng-include src="column.template"></span>
+              <span ng-if="!column.template">{{row[column.id]}}</span>
+          </div>
+
+          <div class="column scroll-td"></div>
+
+        </div>
+
+      </div>
+
+      <div class="loading" ng-show="query.loading">
+        <img src="images/widgets/Red_Spinner.gif">
+      </div>
+
+  </div>
+
+</div>
