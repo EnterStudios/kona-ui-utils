@@ -56,7 +56,9 @@
             "row in query.dataArray | filter:query.sort.search | orderBy:query.sort.order:query.sort.reverse | startFrom:query.sort.page*query.sort.pageSize | limitTo:query.sort.pageSize" ng-class="{'selected' : edited && edited.id==row.id}">
             
             <td ng-repeat="cell in query.cells" 
-                ng-show="cell.show != false && cell.showMetric!=0" class="{{cell.id}}">
+                ng-show="cell.show != false && cell.showMetric!=0" 
+                class="{{cell.id}}" 
+                title="{{row[cell.id+'_tooltip'] || row[cell.id]}}">
                 <span ng-if="cell.template" ng-include src="cell.template"></span>
                 <span ng-if="cell.numberClass" ng-class="numberClass(cell.id, row[cell.id])">{{row[cell.id]}}</span>
                 <span ng-if="!cell.template && !cell.numberClass">{{row[cell.id]}}</span>
